@@ -4,3 +4,7 @@ server:
 spring:
   application:
     name: cns-dispatcher-service
+  cloud:
+    function:
+      definition: pack|label    # 스프링 클라우드 함수가 관리할 함수 정의
+                                # | 연산자를 사용해 두 함수를 합성. 함수 사이의 서로 다른 입출력 타입을 내부적으로 변환함.
