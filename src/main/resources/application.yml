@@ -1,0 +1,6 @@
+server:
+  port: 9003            # 모니터링 기능 추가를 위한 포트 설정
+
+spring:
+  application:
+    name: cns-dispatcher-service
