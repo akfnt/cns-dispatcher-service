@@ -23,7 +23,7 @@ spec:
             exec:                         # 쿠버네티스가 파드에 SIGTERM 신호를 보내기 전에 5초를 기다리게 한다
               command: [ "sh", "-c", "sleep 5" ]
         ports:
-          - containerPort: 9002           # 컨테이너에 의해 노출되는 포트
+          - containerPort: 9003           # 컨테이너에 의해 노출되는 포트
         env:                              # 파드로 전달되는 환경변수의 목록
           - name: BPL_JVM_THREAD_COUNT
             value: "50"
