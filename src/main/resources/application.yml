@@ -4,7 +4,20 @@ server:
 spring:
   application:
     name: cns-dispatcher-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s
   cloud:
     function:
-      definition: pack|label    # 스프링 클라우드 함수가 관리할 함수 정의
-                                # | 연산자를 사용해 두 함수를 합성. 함수 사이의 서로 다른 입출력 타입을 내부적으로 변환함.
+      definition: pack|label                  # 스프링 클라우드 함수가 관리할 함수 정의
+                                              # | 연산자를 사용해 두 함수를 합성. 함수 사이의 서로 다른 입출력 타입을 내부적으로 변환함.
+  stream:
+    bindings:                                 # 대상 바인딩 설정을 위한 섹션
+      packlabel-in-0:                         # 입력 바인딩
+        destination: order-accepted           # 바인더를 연결할 대상의 브로커 내에서의 실제 이름 (rabbitmq exchange)
+        group: ${spring.application.name}     # 대상에 관심을 갖는 소비자 그룹 (애플리케이션 이름과 동일)
+      packlabel-out-0:                        # 출력 바인딩
+        destination: order-dispatched         # 바인더를 연결할 대상의 브로커 내에서의 실제 이름 (rabbitmq exchange)
