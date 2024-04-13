@@ -20,11 +20,12 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.cloud:spring-cloud-function-context'
+	// 스프링 클라우드 함수 의존성과 스프링 부트 스타터 의존성의 경우 스프링 클라우드 스트림에 이미 포함되어 있으므로 제거
 	implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation "io.projectreactor:reactor-test"
+	testImplementation 'io.projectreactor:reactor-test'
+	// 테스트 바인더 의존성
+	testImplementation("org.springframework.cloud:spring-cloud-stream-test-binder")
 }
 
 dependencyManagement {

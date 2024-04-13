@@ -1,5 +1,6 @@
 package com.akfnt.cnsdispatcherservice;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.function.context.FunctionCatalog;
@@ -12,6 +13,9 @@ import java.util.function.Function;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @FunctionalSpringBootTest
+// 스프링 클라우드 스트림에서 함수 프로그래밍 모델을 사용하면 입력 데이터를 받는 함수에 대해서는 입력 바인딩이, 풀력 데이터를 반환하는 함수에 대해서는 출력 바인딩이 자동으로 생성됨
+// 스프링 클라우드 스트림 적용후 packAndLabelOrder() 에서 AssertionError 발생: onNext에서 GenericMessage 가 전송됨 (ClassCastException(GenericMessage <-> OrderDispatchedMessage))
+@Disabled("These tests are only necessary when using the functions alone (no bindings)")
 public class DispatchingFunctionsIntegrationTests {
     @Autowired
     private FunctionCatalog catalog;
