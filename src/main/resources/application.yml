@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: cns-dispatcher-service
+  config:
+    import: "optional:configserver:"
   rabbitmq:
     host: localhost
     port: 5672
@@ -21,3 +23,14 @@ spring:
           group: ${spring.application.name}     # 대상에 관심을 갖는 소비자 그룹 (애플리케이션 이름과 동일)
         packlabel-out-0:                        # 출력 바인딩
           destination: order-dispatched         # 바인더를 연결할 대상의 브로커 내에서의 실제 이름 (rabbitmq exchange)
+    config:
+      uri: http://localhost:8888
+      request-connect-timeout: 5000     # 설정 서버에 연결될 때까지 기다리는 시간(밀리초)
+      request-read-timeout: 5000        # 설정 서버에서 설정 데이터를 읽을 때까지 기다리는 시간(밀리초)
+      fail-fast: false                  # 설정 서버 연결 실패를 치명적 오류로 인식 -> retry 작동 활성화를 위한 조건
+      # production 에서는 해당 값을 true 로 설정
+      retry:
+        max-attempts: 6                 # 시도의 최대 횟수
+        initial-interval: 1000          # 최초 재시도 지연 시간(밀리초)
+        max-interval: 2000              # 재시도 지연 최대 시간(밀리초)
+        multiplier: 1.1                 # 지연 시간 계산 승수
