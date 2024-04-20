@@ -34,3 +34,13 @@ spring:
         initial-interval: 1000          # 최초 재시도 지연 시간(밀리초)
         max-interval: 2000              # 재시도 지연 최대 시간(밀리초)
         multiplier: 1.1                 # 지연 시간 계산 승수
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always       # 애플리케이션의 상세한 상태 정보
+      show-components: always   # 애플리케이션이 사용하는 구성 요소에 대한 정보
