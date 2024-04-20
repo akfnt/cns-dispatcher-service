@@ -1,7 +1,6 @@
 package com.akfnt.cnsdispatcherservice;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Flux;
@@ -9,9 +8,9 @@ import reactor.core.publisher.Flux;
 import java.util.function.Function;
 
 // 함수는 설정 클래스에서 정의된다
+@Slf4j
 @Configuration
 public class DispatchingFunctions {
-    private static final Logger log = LoggerFactory.getLogger(DispatchingFunctions.class);
 
     // 주문을 포장하는 비즈니스 로직을 구현하는 함수
     // 빈으로 정의된 함수는 스프링 클라우드 함수가 찾아서 관리할 수 있다
