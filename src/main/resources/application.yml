@@ -39,10 +39,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health, prometheus
   endpoint:
     health:
       show-details: always       # 애플리케이션의 상세한 상태 정보
       show-components: always   # 애플리케이션이 사용하는 구성 요소에 대한 정보
       probes:
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}             # 애플리케이션 이름으로 마이크로미터 공통 태그를 추가한다. 이로 인해 모든 매트릭에 적용되는 프로메데우스 레이블이 만들어진다.
