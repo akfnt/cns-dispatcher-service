@@ -5,7 +5,7 @@ spring:
   application:
     name: cns-dispatcher-service
   config:
-    import: "optional:configserver:"
+    import: ""                          # config service 로부터 설정 데이터를 임포트 하는 것을 중지. 다시 config service 를 사용하고 싶다면 "optional:configserver:" 을 추가
   rabbitmq:
     host: localhost
     port: 5672
@@ -24,6 +24,7 @@ spring:
         packlabel-out-0:                        # 출력 바인딩
           destination: order-dispatched         # 바인더를 연결할 대상의 브로커 내에서의 실제 이름 (rabbitmq exchange)
     config:
+      enabled: false                    # 스프링 클라우드 컨피그 클라이언트 통합을 비활성화
       uri: http://localhost:8888
       request-connect-timeout: 5000     # 설정 서버에 연결될 때까지 기다리는 시간(밀리초)
       request-read-timeout: 5000        # 설정 서버에서 설정 데이터를 읽을 때까지 기다리는 시간(밀리초)
